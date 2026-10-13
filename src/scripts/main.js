@@ -23,16 +23,28 @@ function updateButtons() {
 }
 
 appendColumn.addEventListener('click', () => {
+  if (table.rows[0].cells.length >= MAX_NUMBER) {
+    return;
+  }
+
   [...table.rows].forEach((row) => row.insertCell());
   updateButtons();
 });
 
 removeColumn.addEventListener('click', () => {
+  if (table.rows[0].cells.length <= MIN_NUMBER) {
+    return;
+  }
+
   [...table.rows].forEach((row) => row.deleteCell(-1));
   updateButtons();
 });
 
 appendRow.addEventListener('click', () => {
+  if (table.rows.length >= MAX_NUMBER) {
+    return;
+  }
+
   const cellCount = table.rows[0].cells.length;
   const newRow = tbody.insertRow();
 
@@ -45,37 +57,10 @@ appendRow.addEventListener('click', () => {
 });
 
 removeRow.addEventListener('click', () => {
+  if (table.rows.length <= MIN_NUMBER) {
+    return;
+  }
+
   table.deleteRow(-1);
   updateButtons();
 });
-
-// container.addEventListener('click', (e) => {
-//   if (e.target === appendColumn) {
-//     [...table.rows].forEach((row) => row.insertCell());
-//   }
-
-//   if (e.target === removeColumn) {
-//     [...table.rows].forEach((row) => row.deleteCell(-1));
-//   }
-
-//   if (e.target === appendRow) {
-//     const columnsCount = table.rows[0].cells.length;
-//     const newRow = table.insertRow();
-
-//     for (let i = 0; i <= columnsCount; i++) {
-//       newRow.insertCell();
-//     }
-
-//     table.appendChild(newRow);
-
-//     const rowToAppend = table.rows[0].cloneNode(true);
-
-//     table.appendChild(rowToAppend);
-//   }
-
-//   if (e.target === removeRow) {
-//     table.deleteRow(-1);
-//   }
-
-//   updateButtons();
-// });
