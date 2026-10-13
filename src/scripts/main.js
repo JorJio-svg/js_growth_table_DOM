@@ -12,13 +12,13 @@ const appendRow = container.querySelector('.append-row');
 const removeRow = container.querySelector('.remove-row');
 
 function updateButtons() {
-  const rowsAmount = table.rows.length;
-  const colomnAmount = table.rows[0].cells.length;
+  const rowsCount = table.rows.length;
+  const colomnCount = table.rows[0].cells.length;
 
-  appendColumn.disabled = colomnAmount >= MAX_NUMBER;
-  removeColumn.disabled = colomnAmount <= MIN_NUMBER;
-  appendRow.disabled = rowsAmount >= MAX_NUMBER;
-  removeRow.disabled = rowsAmount <= MIN_NUMBER;
+  appendColumn.disabled = colomnCount >= MAX_NUMBER;
+  removeColumn.disabled = colomnCount <= MIN_NUMBER;
+  appendRow.disabled = rowsCount >= MAX_NUMBER;
+  removeRow.disabled = rowsCount <= MIN_NUMBER;
 }
 
 container.addEventListener('click', (e) => {
@@ -31,9 +31,12 @@ container.addEventListener('click', (e) => {
   }
 
   if (e.target === appendRow) {
-    const rowClone = table.rows[0].cloneNode(true);
+    const columnsCount = table.rows[0].cells.length;
+    const newRow = table.insertRow();
 
-    table.append(rowClone);
+    for (let i = 0; i <= columnsCount; i++) {
+      newRow.insertCell();
+    }
   }
 
   if (e.target === removeRow) {
